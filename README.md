@@ -1,8 +1,8 @@
-SQL-Centric Backtesting and Feature Engineering
+## SQL-Centric Backtesting and Feature Engineering
 
 This project demonstrates how SQL Server can be used as the primary engine for financial data processing, feature engineering, and backtesting of trading strategies. It focuses on building a complete analytical pipeline for Vietnamese stock market data and benchmarking its performance against Python-based workflows.
 
-Overview
+## Overview
 
 The system handles around 160,000 historical records from 30 listed companies.
 It uses structured SQL techniques such as CTEs, window functions, and stored procedures to extract, transform, and compute technical indicators directly inside the database.
