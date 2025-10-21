@@ -1,57 +1,73 @@
-## SQL-Centric Backtesting and Feature Engineering
+SQL-Centric Backtesting & Feature Engineering (Vietnam Stock Market)
+Overview
 
-This project demonstrates how SQL Server can be used as the primary engine for financial data processing, feature engineering, and backtesting of trading strategies. It focuses on building a complete analytical pipeline for Vietnamese stock market data and benchmarking its performance against Python-based workflows.
+This project builds a SQL-first pipeline for financial data processing, feature engineering, and backtesting of trading strategies on Vietnamese stocks. It demonstrates how far SQL Server can go for analytics typically handled in Python, and benchmarks SQL workflows against equivalent Python implementations.
 
-## Overview
+The system processes ~160,000 historical records from 30 listed companies (daily OHLCV). Technical indicators are computed directly in SQL using CTEs and window functions; backtesting is executed via stored procedures with run-level logging for analysis.
 
-The system handles around 160,000 historical records from 30 listed companies.
-It uses structured SQL techniques such as CTEs, window functions, and stored procedures to extract, transform, and compute technical indicators directly inside the database.
-The main goal is to evaluate whether a SQL-first architecture can deliver comparable speed and scalability to Python pipelines for quantitative research and backtesting.
+Objectives
+
+Implement end-to-end feature engineering and backtesting directly in SQL Server
+
+Compare performance and maintainability of SQL workflows against Python pipelines
+
+Provide a BI-ready schema for downstream analytics and dashboards
+
+Ensure auditability and reproducibility of all transformation steps inside the database
+
+Dataset
+
+Data consists of historical daily OHLCV for ~30 Vietnamese tickers. The repository does not include raw market data due to licensing constraints. You can load your own data (CSV or staging tables) into the provided schema before running feature generation and backtests.
 
 Repository Structure
-createDatabase.sql        – defines the core schema and base tables  
-bilayer.sql               – builds the BI star schema (DimDate, DimTicker, DimFeature, FactMarket, FactBacktest)  
-backtestProcedure.sql     – includes stored procedures for running strategies and logging performance results
+createDatabase.sql        -- Core schema and base tables (tickers, calendar, OHLCV, reference)
+bilayer.sql               -- BI star schema (DimDate, DimTicker, DimFeature, FactMarket, FactBacktest)
+backtestProcedure.sql     -- Stored procedures for strategy runs and result logging
+README.md                 -- Project documentation
 
-## Key Features
+How to Run
 
-Fully SQL-based implementation of feature generation, including indicators such as SMA, EMA, MACD, RSI, Bollinger Bands, ATR, OBV, and CMF.
+Create a SQL Server database and connect with a user that can create objects.
 
-Comparative benchmarking between SQL and Python to assess execution time, logical reads, and resource usage.
+Execute createDatabase.sql to create core tables and reference objects.
 
-Backtesting procedures that simulate trading strategies and store run-level outputs for analysis.
+Load historical OHLCV data into the core tables.
 
-BI-friendly schema design that integrates smoothly with Power BI or other visualization tools.
+Execute bilayer.sql to build BI dimensions and fact tables.
 
-## How to Use
+Execute backtestProcedure.sql to enable strategy execution and logging.
 
-Create a SQL Server database.
+(Optional) Connect Power BI/Tableau to the BI layer (FactMarket, FactBacktest) for reporting.
 
-Run createDatabase.sql to create base tables.
+Technologies Used
 
-Load historical OHLCV data into the tables.
+SQL Server (CTEs, window functions, stored procedures)
 
-Run backtestProcedure.sql to enable the backtesting module.
+Python (benchmark notebooks/pipelines for comparison, optional)
 
-Run bilayer.sql to generate the BI schema.
+BI tools (Power BI/Tableau) for visualization on top of the BI schema
 
-(Optional) Connect Power BI or another BI tool to visualize the results.
+Results and Findings
 
-### Example Use Cases
+SQL performs efficiently for window-based calculations (e.g., SMA/EMA, volatility metrics, rolling aggregates) and works well for indicator feature engineering using window functions.
 
-Build a reproducible, SQL-native backtesting framework.
+Recursive or iterative logic (e.g., multi-step signal construction or loop-style backtesting) generally runs slower in SQL than in Python due to procedural patterns.
 
-Measure SQL performance versus Python in real-world data pipelines.
+SQL offers strong traceability and determinism: every step is auditable within the database, which benefits governance, debugging, and reproducibility in enterprise settings.
 
-Automate feature updates and backtest runs for trading analytics.
+Limitations and Future Work
 
-Integrate structured financial data into enterprise BI systems.
+Raw data is not included; users must supply their own historical OHLCV.
 
-### Results and Findings
+Recursive procedures can be optimized further (batching in CTEs, memoization patterns).
 
-Testing showed that SQL performs efficiently for most window-based calculations such as moving averages (SMA, EMA), volatility indicators, and range-based aggregations.
-However, recursive or iterative computations—such as MACD signal lines or multi-step backtesting logic—take longer to execute in SQL compared to Python due to their procedural nature.
+A hybrid orchestration (SQL for window features, Python for iterative steps) may improve overall throughput.
 
-While Python pipelines offer greater flexibility for complex loops, the SQL approach provides strong traceability, consistency, and transparency.
+Planned additions: more indicators (rolling correlations, regimes), portfolio-level backtests, and automated data ingestion.
 
+Acknowledgments
 
+I would like to sincerely thank Mr. Nguyễn An Tế for his kind guidance and support during the course of this project. His thoughtful advice helped me stay focused and approach each step with care and clarity. I am truly grateful for his time, encouragement, and the trust he placed in my efforts.
+
+License
+This repository is for educational and non-commercial research purposes only. The authors do not publish, distribute, or license any dataset. Use of the crawling script must comply with the source website’s terms and applicable laws.
