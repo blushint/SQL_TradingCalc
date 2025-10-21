@@ -58,6 +58,30 @@ SQL offers clear traceability and determinism, making it well-suited for enterpr
 
 I would like to express my sincere thanks to **Mr. Nguyễn An Tế** for his kind guidance and support during the course of this project. His thoughtful advice helped me stay focused and approach each step with care and clarity. I am truly grateful for his time, encouragement, and the trust he placed in my efforts.
 
+## Appendix
+
+### Dashboard Overview
+
+Below is an overview of the dashboards developed in this project.
+
+### 1. Overview Dashboard
+*Provides a high-level summary of data coverage, trading universe, and key portfolio metrics across selected tickers and time ranges.*
+
+<img width="1895" height="1054" alt="image" src="https://github.com/user-attachments/assets/03bc3b53-d027-4746-a276-5273ab5292b4" />
+
+### 2. Feature Engineering Dashboard
+*Visualizes computed indicators such as SMA, EMA, MACD, RSI, Bollinger Bands, and compares SQL-based feature generation with Python workflows.*
+
+<img width="1875" height="1052" alt="image" src="https://github.com/user-attachments/assets/561e9544-a546-41a2-9d95-92226f1ddadb" />
+
+### 3. Backtesting Dashboard
+*Displays backtest results including equity curves, performance metrics, and strategy-level comparisons between SQL and Python implementations.*
+
+<img width="1892" height="1065" alt="image" src="https://github.com/user-attachments/assets/708fae26-7182-469d-8d4a-71af87573625" />
+
+
+
+
 ## License
 
 This repository is for educational and non-commercial research purposes only.  
