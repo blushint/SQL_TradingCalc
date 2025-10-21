@@ -38,7 +38,7 @@ Raw market data is not included due to licensing restrictions. You can load your
 
 - SQL Server (CTEs, window functions, stored procedures)  
 - Python (optional benchmarking pipelines)  
-- Power BI or Tableau for visualization  
+- Power BI for visualization  
 
 ## Results and Findings
 
