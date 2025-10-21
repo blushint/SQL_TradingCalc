@@ -20,10 +20,10 @@ Ensure auditability and reproducibility of all transformation steps inside the d
 Data consists of historical daily OHLCV for ~30 Vietnamese tickers. The repository does not include raw market data due to licensing constraints. You can load your own data (CSV or staging tables) into the provided schema before running feature generation and backtests.
 
 ## Repository Structure
-createDatabase.sql        -- Core schema and base tables (tickers, calendar, OHLCV, reference)
-bilayer.sql               -- BI star schema (DimDate, DimTicker, DimFeature, FactMarket, FactBacktest)
-backtestProcedure.sql     -- Stored procedures for strategy runs and result logging
-README.md                 -- Project documentation
+createDatabase.sql   -- Core schema and base tables (tickers, calendar, OHLCV, reference)  
+bilayer.sql          -- BI star schema (DimDate, DimTicker, DimFeature, FactMarket, FactBacktest)  
+backtestProcedure.sql -- Stored procedures for strategy runs and result logging  
+README.md            -- Project documentation
 
 ## How to Run
 
