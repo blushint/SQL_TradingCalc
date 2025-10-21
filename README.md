@@ -1,99 +1,53 @@
-Here’s a professional, GitHub-ready **README.md** written in English — clean, concise, and structured for your uploaded SQL files (`createDatabase.sql`, `bilayer.sql`, `backtestProcedure.sql`).
+SQL-Centric Backtesting and Feature Engineering
 
----
+This project demonstrates how SQL Server can be used as the primary engine for financial data processing, feature engineering, and backtesting of trading strategies. It focuses on building a complete analytical pipeline for Vietnamese stock market data and benchmarking its performance against Python-based workflows.
 
-# SQL-Centric Backtesting & Feature Engineering for Trading Strategies
+Overview
 
-This project explores a **SQL-first approach** to financial data engineering and backtesting, comparing SQL Server performance against Python workflows using **Vietnamese stock market data**.
+The system handles around 160,000 historical records from 30 listed companies. It uses structured SQL techniques such as CTEs, window functions, and stored procedures to extract, transform, and compute technical indicators directly inside the database.
+The main goal is to evaluate whether a SQL-first architecture can deliver comparable speed and scalability to Python pipelines for quantitative research and backtesting.
 
----
+Repository Structure
+createDatabase.sql        – defines the core schema and base tables  
+bilayer.sql               – builds the BI star schema (DimDate, DimTicker, DimFeature, FactMarket, FactBacktest)  
+backtestProcedure.sql     – includes stored procedures for running strategies and logging performance results
 
-## 1. Project Overview
+Key Features
 
-The repository demonstrates how complex analytical pipelines — traditionally done in Python — can be implemented efficiently in **SQL Server** using:
+Fully SQL-based implementation of feature generation, including indicators such as SMA, EMA, MACD, RSI, Bollinger Bands, ATR, OBV, and CMF.
 
-* Common Table Expressions (CTEs)
-* Window functions
-* Stored procedures
-* Layered schema design (OLTP + BI + Backtesting layers)
+Comparative benchmarking between SQL and Python to assess execution time, logical reads, and resource usage.
 
-It supports both **feature generation** (technical indicators) and **backtesting** of trading strategies directly in SQL.
+Backtesting procedures that simulate trading strategies and store run-level outputs for analysis.
 
----
+A BI-friendly schema design that integrates smoothly with Power BI or other visualization tools.
 
-## 2. Repository Structure
+How to Use
 
-```
-/sql/
-│
-├── createDatabase.sql        -- Defines core tables and schema for financial market data
-├── bilayer.sql               -- Creates BI star-schema (DimDate, DimTicker, DimFeature, FactMarket, FactBacktest)
-├── backtestProcedure.sql     -- Implements stored procedures for strategy runs and performance logging
-```
+Create a SQL Server database.
 
----
+Run createDatabase.sql to create base tables.
 
-## 3. Data Scope
+Run bilayer.sql to generate the BI schema.
 
-* ~160K historical records
-* 30 listed Vietnamese companies
-* Daily OHLCV data (Open, High, Low, Close, Volume)
-* Enriched with generated features such as SMA, EMA, MACD, RSI, Bollinger Bands, ATR, OBV, and CMF
+Load your historical OHLCV data into the database.
 
----
+Run backtestProcedure.sql to enable the backtesting module.
 
-## 4. Key Features
+Optionally, connect Power BI to visualize the results.
 
-* **SQL-Centric Feature Engineering:**
-  All indicators are calculated directly in SQL using efficient window and aggregation techniques.
+Use Cases
 
-* **Performance Benchmarking:**
-  SQL workflows are compared with equivalent Python pipelines to evaluate performance, I/O cost, and scalability.
+Building a reproducible and database-native backtesting framework.
 
-* **Backtesting Framework:**
-  Parameterized stored procedures simulate trading strategies and log results for analysis.
+Measuring SQL performance versus Python in real-world data pipelines.
 
-* **BI Integration:**
-  Fact tables (FactMarket, FactBacktest) are designed for direct integration with BI tools like Power BI or Tableau.
+Automating feature updates and backtest runs for daily trading analytics.
 
----
+Integrating structured financial data into enterprise BI systems.
 
-## 5. Setup Instructions
+Author
 
-1. Create a SQL Server database.
-2. Run `createDatabase.sql` to initialize base tables.
-3. Execute `bilayer.sql` to generate BI schema objects.
-4. Load market data into the core tables (`price_ohlcv`, `ticker`, etc.).
-5. Run `backtestProcedure.sql` to enable backtesting modules.
-
-Optional: Export results to Power BI for dashboard visualization.
-
----
-
-## 6. Example Use Cases
-
-* Compare execution time and resource usage of SQL vs Python pipelines.
-* Generate reusable stored procedures for daily feature updates.
-* Integrate SQL-calculated indicators into automated trading models.
-* Visualize performance metrics and trading outcomes in BI dashboards.
-
----
-
-## 7. Future Improvements
-
-* Add advanced feature sets (e.g., volatility clustering, rolling correlations).
-* Implement hybrid SQL–Python orchestration using Airflow or dbt.
-* Expand backtesting layer for multi-asset portfolio simulation.
-
----
-
-## 8. Author
-
-**Mai Dao**
-Graduate Researcher | Data & BI Engineer
-
-> Focus: SQL optimization, backtesting systems, financial analytics.
-
----
-
-Would you like me to extend this README with a **“Performance Comparison Results”** section (SQL vs Python benchmark summary table)? It would make the project more impressive for recruiters or thesis reviewers.
+Mai Dao
+Graduate Researcher / Data & BI Engineer
+Focus areas: SQL optimization, feature engineering, backtesting frameworks, and data-driven analytics.
