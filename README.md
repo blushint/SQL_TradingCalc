@@ -13,7 +13,7 @@ createDatabase.sql        – defines the core schema and base tables
 bilayer.sql               – builds the BI star schema (DimDate, DimTicker, DimFeature, FactMarket, FactBacktest)  
 backtestProcedure.sql     – includes stored procedures for running strategies and logging performance results
 
-Key Features
+## Key Features
 
 Fully SQL-based implementation of feature generation, including indicators such as SMA, EMA, MACD, RSI, Bollinger Bands, ATR, OBV, and CMF.
 
@@ -23,21 +23,21 @@ Backtesting procedures that simulate trading strategies and store run-level outp
 
 BI-friendly schema design that integrates smoothly with Power BI or other visualization tools.
 
-How to Use
+## How to Use
 
 Create a SQL Server database.
 
 Run createDatabase.sql to create base tables.
 
-Run bilayer.sql to generate the BI schema.
-
 Load historical OHLCV data into the tables.
 
 Run backtestProcedure.sql to enable the backtesting module.
 
+Run bilayer.sql to generate the BI schema.
+
 (Optional) Connect Power BI or another BI tool to visualize the results.
 
-Example Use Cases
+### Example Use Cases
 
 Build a reproducible, SQL-native backtesting framework.
 
@@ -47,15 +47,11 @@ Automate feature updates and backtest runs for trading analytics.
 
 Integrate structured financial data into enterprise BI systems.
 
-Results and Findings
+### Results and Findings
 
-Initial testing showed that SQL pipelines achieved comparable accuracy to Python-based feature generation while reducing I/O operations by ~35%.
-Query execution time for mid-sized datasets (under 200K rows) was within the same order of magnitude as Python Pandas workflows, with better consistency under repeated runs.
+Testing showed that SQL performs efficiently for most window-based calculations such as moving averages (SMA, EMA), volatility indicators, and range-based aggregations.
+However, recursive or iterative computations—such as MACD signal lines or multi-step backtesting logic—take longer to execute in SQL compared to Python due to their procedural nature.
 
-These findings suggest that a SQL-centric approach is viable for scalable backtesting systems where database integration and performance transparency are priorities.
+While Python pipelines offer greater flexibility for complex loops, the SQL approach provides strong traceability, consistency, and transparency.
 
-Author
 
-Mai Dao
-Graduate Researcher / Data & BI Engineer
-Focus areas: SQL optimization, feature engineering, backtesting frameworks, and data-driven analytics.
