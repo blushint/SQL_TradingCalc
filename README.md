@@ -43,6 +43,7 @@ Raw market data is not included due to licensing restrictions. You can load your
 ## Results and Findings
 
 SQL performs efficiently for most **window-based calculations** such as SMA, EMA, volatility metrics, and rolling aggregates.  
+
 However, **recursive or iterative logic** (e.g., MACD signal construction or multi-step backtesting loops) tends to be slower in SQL than in Python due to its procedural execution model.  
 
 SQL offers clear traceability and determinism, making it well-suited for enterprise-grade analytics where reproducibility and governance are required.
